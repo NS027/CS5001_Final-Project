@@ -8,6 +8,6 @@ Instructions on how to install and run the project.
 
 ## Usage
 
-How to use the application and its features.
+How to use the application and its features. By Streamlit.
 
 
