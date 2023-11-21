@@ -2,6 +2,30 @@ import streamlit as st
 import requests
 
 
+def get_abbreviaton():
+    # API endpoint URL
+    url = (
+        f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json"
+    )
+
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+
+        # Remove the first data from the json
+        first_key = list(data.keys())[0]
+        del data[first_key]
+        # Convert the data into a dictionary
+        data = {key.upper(): value for key, value in data.items()}
+
+        return data
+
+    else:
+        print(f"Error fetching data: HTTP Status Code {response.status_code}")
+        data = None
+
+
 def convert_currency(amount, from_currency, to_currency):
     # API endpoint URL
     url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{from_currency}/{to_currency}.json"
@@ -34,19 +58,25 @@ def main():
 
     st.header("Currency Converter")
     amount = st.number_input("Enter the amount: ")
-    from_currency = st.selectbox(
-        "From currency", ["USD", "CNY", "GBP", "CAD", "EUR"]
-    ).lower()
-    to_currency = st.selectbox(
-        "To currency", ["USD", "CNY", "GBP", "CAD", "EUR"]
-    ).lower()
+
+    currency_list = get_abbreviaton()
+    select_box_data = [
+        key.upper() for key in currency_list.keys()
+    ]  # Convert keys to uppercase
+
+    from_currency = st.selectbox("From currency", select_box_data)
+    to_currency = st.selectbox("To currency", select_box_data)
+
+    # Convert the selected currency codes to lower case for API compatibility
+    from_currency = from_currency.lower()
+    to_currency = to_currency.lower()
 
     if st.button("Convert"):
-        # Call function to perform conversion (to be implemented)
         result = convert_currency(amount, from_currency, to_currency)
-        st.success(
-            f"{amount} {from_currency.upper()} is {result:.2f} {to_currency.upper()}"
-        )
+        if result is not None:
+            st.success(
+                f"{amount} {from_currency.upper()} is {result:.2f} {to_currency.upper()}"
+            )
 
 
 if __name__ == "__main__":
