@@ -1,6 +1,20 @@
 import streamlit as st
 import requests
 
+selected_currencies = [
+    "CNY",
+    "USD",
+    "HKD",
+    "GBP",
+    "AUD",
+    "JPY",
+    "EUR",
+    "CAD",
+    "SGD",
+    "NZD",
+    "CHF",
+]
+
 
 def get_abbreviaton():
     # API endpoint URL
@@ -61,7 +75,7 @@ def main():
 
     currency_list = get_abbreviaton()
     select_box_data = [
-        key.upper() for key in currency_list.keys()
+        key for key in currency_list.keys() if key in selected_currencies
     ]  # Convert keys to uppercase
 
     from_currency = st.selectbox("From currency", select_box_data)
