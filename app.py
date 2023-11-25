@@ -4,8 +4,9 @@ Final Project
 This file contains the driver function that runs the program.
 """
 import streamlit as st
-from pages.currency_convertor import convert_currency
 from pages.main_page import main_page
+from pages.currency_convertor import convert_currency
+from pages.currency_rate_display import display_currency_rate
 
 
 def main():
@@ -24,6 +25,7 @@ def main():
     PAGES = {
         "Home": main_page,
         "Currency Converter": convert_currency,
+        "Currency Rate Display": display_currency_rate,
         # Add other pages as needed
     }
 
