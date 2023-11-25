@@ -8,7 +8,7 @@ from models.selected_currency import SelectedCurrency
 from models.fetch_currency_data import get_exchange_rate, get_abbreviaton
 
 
-def convert_currency(from_currency, to_currency, amount):
+def convert_currency():
     """
     Function -- convert_currency
         Convert the currency
@@ -19,20 +19,37 @@ def convert_currency(from_currency, to_currency, amount):
     Returns:
         A float that contains the converted amount
     """
-    # Get the exchange rate from the API
-    exchange_rate = get_exchange_rate(from_currency, to_currency)
+    # Get the entered amount from the user
+    amount = st.number_input("Enter the amount: ")
+    # Set the select box value
+    select_box_value = SelectedCurrency.selected_currencies
 
-    # Convert the currency
-    converted_amount = amount * exchange_rate
+    # Set the select box
+    select_from_currency = st.selectbox("From currency", select_box_value)
+    select_to_currency = st.selectbox("To currency", select_box_value)
 
-    # Get the currency abbreviation
-    abbreviation = get_abbreviaton()
-    from_currency_name = abbreviation.get(from_currency.upper(), "None")
-    to_currency_name = abbreviation.get(to_currency.upper(), "None")
+    from_currency = select_from_currency.lower()
+    to_currency = select_to_currency.lower()
 
     # Display the conversion result
-    st.success(
-        f"{amount} {from_currency_name} is {converted_amount:.2f} {to_currency_name}"
-    )
+    if st.button("Convert", key="convert_button"):
+        # Get the exchange rate from the API
+        exchange_rate = get_exchange_rate(from_currency, to_currency)
 
-    return converted_amount
+        if exchange_rate is not None:
+            # Convert the currency
+            converted_amount = amount * exchange_rate
+
+            # Get the currency abbreviation
+            abbreviation = get_abbreviaton()
+            from_currency_name = abbreviation.get(from_currency.upper(), "None")
+            to_currency_name = abbreviation.get(to_currency.upper(), "None")
+            st.success(
+                f"{amount} {from_currency_name} is {converted_amount:.2f} {to_currency_name}"
+            )
+        else:
+            st.error("Failed to get the exchange rate.")
+
+
+if __name__ == "__main__":
+    convert_currency()
