@@ -7,6 +7,7 @@ import streamlit as st
 from pages.main_page import main_page
 from pages.currency_convertor import convert_currency
 from pages.currency_rate_display import display_currency_rate
+from pages.currency_historical_rate import display_historical_currency_rate
 
 
 def main():
@@ -18,14 +19,15 @@ def main():
     Returns:
         None
     """
-    st.title("Welcome to Currency Compass")
-    # Other elements on the main page
+    st.title("Currency Compass")
+    # Other elements on the Home page
 
     # Add the main page to the PAGES dictionary
     PAGES = {
         "Home": main_page,
         "Currency Converter": convert_currency,
         "Currency Rate Display": display_currency_rate,
+        "Currency Historical Rate": display_historical_currency_rate,
         # Add other pages as needed
     }
 
