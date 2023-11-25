@@ -84,6 +84,16 @@ def currency_line_chart():
 
 
 def set_the_pilot(df, base_currency, target_currency):
+    """
+    Function -- set_the_pilot
+        Display the line chart of currency rate.
+    Parameters:
+        df -- the dataframe that contains the currency rate data
+        base_currency -- the currency that the user want to convert from
+        target_currency -- the currency that the user want to convert to
+    Returns:
+        None
+    """
     y_min = df["Rate"].min() * 0.99  # 1% margin at the bottom
     y_max = df["Rate"].max() * 1.01  # 1% margin at the top
     plt.figure(figsize=(10, 6))

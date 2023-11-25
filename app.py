@@ -9,6 +9,7 @@ from pages.currency_convertor import convert_currency
 from pages.currency_rate_display import display_currency_rate
 from pages.currency_historical_rate import display_historical_currency_rate
 from pages.currency_line_chart import currency_line_chart
+from pages.currency_comprehensive_display import currency_comprehensive_display
 
 
 def main():
@@ -30,7 +31,7 @@ def main():
         "Currency Rate Display": display_currency_rate,
         "Currency Historical Rate": display_historical_currency_rate,
         "Currency Line Chart": currency_line_chart,
-        # Add other pages as needed
+        "Currency Comprehensive Display": currency_comprehensive_display,
     }
 
     # Use a selectbox for navigation
