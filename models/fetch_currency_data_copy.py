@@ -5,7 +5,6 @@ This file contains the function that fetches the currency data from the API.
 """
 import requests
 import streamlit as st
-from datetime import datetime
 
 
 class CurrencyData:
@@ -119,9 +118,6 @@ class CurrencyData:
         Returns:
             A list that contains the historical currency rate data
         """
-        # # Ensure that 'date' is a datetime object
-        # if not isinstance(date, datetime):
-        #     raise ValueError("date must be a datetime object")
 
         formatted_date = date.strftime("%Y-%m-%d")
 
