@@ -5,11 +5,11 @@ This file contains the driver function that runs the program.
 """
 import streamlit as st
 from pages.main_page import main_page
-from pages.currency_convertor import convert_currency
-from pages.currency_rate_display import display_currency_rate
-from pages.currency_historical_rate import display_historical_currency_rate
-from pages.currency_line_chart import currency_line_chart
-from pages.currency_comprehensive_display import currency_comprehensive_display
+from pages.currency_convertor_copy import convert_currency
+from pages.currency_rate_display_copy import display_currency_rate
+from pages.currency_historical_rate_copy import display_historical_currency_rate
+from pages.currency_line_chart_copy import currency_line_chart
+from pages.currency_comprehensive_display_copy import currency_comprehensive_display
 
 
 def main():
