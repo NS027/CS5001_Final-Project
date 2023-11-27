@@ -5,9 +5,7 @@ This file contains the function that converts the currency.
 """
 import streamlit as st
 from models.selected_currency import SelectedCurrency
-from models.fetch_currency_data_copy import CurrencyData
-
-# from models.fetch_currency_data import get_exchange_rate, get_abbreviaton
+from models.fetch_currency_data import get_exchange_rate, get_abbreviaton
 
 
 def convert_currency():
@@ -21,9 +19,6 @@ def convert_currency():
     Returns:
         A float that contains the converted amount
     """
-    # Create an instance of CurrencyData
-    currency_data = CurrencyData()
-
     # Get the entered amount from the user
     amount = st.number_input("Enter the amount: ")
     # Set the select box value
@@ -39,14 +34,14 @@ def convert_currency():
     # Display the conversion result
     if st.button("Convert", key="convert_button"):
         # Get the exchange rate from the API
-        exchange_rate = currency_data.get_exchange_rate(from_currency, to_currency)
+        exchange_rate = get_exchange_rate(from_currency, to_currency)
 
         if exchange_rate is not None:
             # Convert the currency
             converted_amount = amount * exchange_rate
 
             # Get the currency abbreviation
-            abbreviation = currency_data.get_abbreviaton()
+            abbreviation = get_abbreviaton()
             from_currency_name = abbreviation.get(from_currency.upper(), "None")
             to_currency_name = abbreviation.get(to_currency.upper(), "None")
             st.success(

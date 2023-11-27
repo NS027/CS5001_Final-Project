@@ -6,7 +6,7 @@ This file contains the function that displays the currency rate.
 import streamlit as st
 import pandas as pd
 from models.selected_currency import SelectedCurrency
-from models.fetch_currency_data import get_currency_from_base_currency
+from models.fetch_currency_data import CurrencyData
 
 
 def display_currency_rate():
@@ -18,6 +18,9 @@ def display_currency_rate():
     Returns:
         None
     """
+    # Create an instance of CurrencyData
+    currency_data = CurrencyData()
+
     # Set the select box value
     select_box_value = SelectedCurrency.selected_currencies
 
@@ -25,7 +28,7 @@ def display_currency_rate():
     base_currency = st.selectbox("Base currency", select_box_value)
 
     # Using pandas to convert the dictionary to a dataframe
-    new_dict = get_currency_from_base_currency(base_currency)
+    new_dict = currency_data.get_currency_from_base_currency(base_currency)
     df = pd.DataFrame.from_dict(new_dict, orient="index")
 
     # Rename the second column to "Rate"

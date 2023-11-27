@@ -10,9 +10,7 @@ import base64
 from datetime import datetime, timedelta
 from io import BytesIO
 from models.selected_currency import SelectedCurrency
-from models.fetch_currency_data_copy import CurrencyData
-
-# from models.fetch_currency_data import get_currency_historical_data, get_exchange_rate
+from models.fetch_currency_data import get_currency_historical_data, get_exchange_rate
 
 
 def mini_chart(df_historical):
@@ -36,17 +34,6 @@ def mini_chart(df_historical):
 
 
 def currency_comprehensive_display():
-    """
-    Function -- currency_comprehensive_display
-        Display the comprehensive currency rate
-    Parameters:
-        None
-    Returns:
-        None
-    """
-    # Create an instance of CurrencyData
-    currency_data = CurrencyData()
-
     st.title("Currency Comprehensive Display")
     st.write(
         "This page displays the comprehensive currency rate. You can select the currency and the time period."
@@ -57,9 +44,7 @@ def currency_comprehensive_display():
     all_data = []
     for to_currency in select_box_value:
         if to_currency != from_currency:
-            current_rate = currency_data.get_exchange_rate(
-                from_currency.lower(), to_currency.lower()
-            )
+            current_rate = get_exchange_rate(from_currency.lower(), to_currency.lower())
             if current_rate:
                 # Round the rate to 2 decimal places
                 current_rate = round(current_rate, 2)
@@ -76,7 +61,7 @@ def currency_comprehensive_display():
             historical_data = []
             for i in range(5):
                 date = datetime.now() - timedelta(days=i)
-                rate = currency_data.get_currency_historical_data(
+                rate = get_currency_historical_data(
                     from_currency.lower(), to_currency.lower(), date
                 )
                 if rate is not None:

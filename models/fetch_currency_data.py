@@ -7,145 +7,123 @@ import requests
 import streamlit as st
 
 
-def get_abbreviaton():
+class CurrencyData:
     """
-    Function -- get_abbreviaton
-        Get the currency abbreviation from the API
-    Parameters:
+    Class -- CurrencyData
+        This class contains the functions that fetches the currency data from the API.
+    Attributes:
         None
-    Returns:
-        A dictionary that contains the currency abbreviation
+    Methods:
+        get_abbreviaton -- Get the currency abbreviation from the API
+        get_exchange_rate -- Get the exchange rate from the API
+        get_currency_from_base_currency -- Get the currency rate data base on base_currency from the API
+        get_currency_historical_data -- Get the historical currency rate data from the API
     """
-    # API endpoint URL
-    url = (
-        f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json"
-    )
 
-    try:
-        # Send a request to the API
-        response = requests.get(url)
+    def __init__(self):
+        """
+        Initialize CurrencyData with the API base URL
+        """
+        self.abbreviation = None
+        self.exchange_rate = None
+        self.base_data = None
+        self.historical_data = None
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            data = response.json()
-
-            # Remove the first data from the json
-            first_key = list(data.keys())[0]
-            del data[first_key]
-            # Convert the data into a dictionary
-            data = {key.upper(): value for key, value in data.items()}
-
-            return data
-        else:
-            # Handle request errors
-            st.error(f"Error fetching data: HTTP Status Code {response.status_code}")
+    def fetch_data(self, url):
+        """
+        Functions -- fetch_data
+            Fetch the currency data from the API
+        """
+        try:
+            # Send a reuquest to the API
+            response = requests.get(url)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                # Handle request errors
+                st.error(f"Error fetching data: HTTP Status Code{requests.status_code}")
+                return None
+        except Exception as ex:
+            st.error(f"An error occurred: {ex}")
             return None
 
-    except Exception as ex:
-        # Handle exceptions
-        st.error(f"An error occurred: {ex}")
-        return None
+    def get_abbreviaton(self):
+        """
+        Function -- get_abbreviation
+            Get the currency abbreviation from the API
+        Parameters:
+            None
+        Returns:
+            A dictionary that contains the currency abbreviation
+        """
+        # API endpoint URL
+        url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json"
 
+        self.abbreviation = self.fetch_data(url)
+        data = self.abbreviation
+        # Remove the first data from the json
+        first_key = list(data.keys())[0]
+        del data[first_key]
 
-def get_exchange_rate(from_currency, to_currency):
-    """
-    Function -- get_exchange_rate
-        Get the exchange rate from the API
-    Parameters:
-        from_currency -- the currency that the user want to convert from
-        to_currency -- the currency that the user want to convert to
-    Returns:
-        A float that contains the exchange rate
-    """
-    # API endpointr URL
-    url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{from_currency}/{to_currency}.json"
+        # Convert the data into a dictionary
+        self.abbreviation = {key.upper(): value for key, value in data.items()}
+        return self.abbreviation
 
-    try:
-        # Send a request to the API
-        response = requests.get(url)
+    def get_exchange_rate(self, from_currency, to_currency):
+        """
+        Function -- get_exchange_rate
+           Get the exchange rate from the API
+        Parameters:
+            from_currency -- the currency that the user want to convert from
+            to_currency -- the currency that the user want to convert to
+        Returns:
+            A float that contains the exchange rate
+        """
+        # API endpoint URL
+        url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{from_currency}/{to_currency}.json"
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            data = response.json()
+        data = self.fetch_data(url)
+        # Get the exchange rate
+        self.exchange_rate = data[to_currency]
+        return self.exchange_rate
 
-            # Get the exchange rate
-            exchange_rate = data[to_currency]
+    def get_currency_from_base_currency(self, base_currency):
+        """
+        Fuction -- get_currency_from_base_currency
+            Get the currency rate data base on base_currency from the API
+        Parameters:
+            base_currency -- the currency that the user want to convert from
+        Returns:
+            A dataframe that contains the currency buy rate data
+        """
+        # API endpoint URL
+        url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{base_currency.lower()}.json"
 
-            return exchange_rate
-        else:
-            # Handle request errors
-            st.error(f"Error fetching data: HTTP Status Code {response.status_code}")
-            return None
-    except Exception as ex:
-        # Handle other errors (e.g., network issues)
-        st.error(f"An error occurred: {ex}")
-        return None
+        data = self.fetch_data(url)
+        # Remove the first data from the json
+        first_key = list(data.keys())[0]
+        del data[first_key]
+        # Create a new dictionary with the keys and values
+        self.base_data = data[base_currency.lower()]
+        return self.base_data
 
+    def get_currency_historical_data(self, base_currency, target_currency, date):
+        """
+        Function -- get_currency_historical_data
+            Get the historical currency rate data from the API
+        Parameters:
+            base_currency -- the currency that the user want to convert from
+            target_currency -- the currency that the user want to convert to
+            days_to_fetch -- the number of days to fetch
+        Returns:
+            A list that contains the historical currency rate data
+        """
 
-def get_currency_from_base_currency(base_currency):
-    """
-    Function -- get_currency_from_base_currency
-        Get the currency rate data base on base_currency from the API
-    Parameters:
-        base_currency -- the currency that the user want to convert from
-    Returns:
-        A dataframe that contains the currency buy rate data
-    """
-    # API endpoint API
-    url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{base_currency.lower()}.json"
+        formatted_date = date.strftime("%Y-%m-%d")
 
-    try:
-        # Send a request to the API
-        response = requests.get(url)
+        # API endpoint URL
+        url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/{formatted_date}/currencies/{base_currency.lower()}/{target_currency.lower()}.json"
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            data = response.json()
-            # Remove the first data from the json
-            first_key = list(data.keys())[0]
-            del data[first_key]
-            # Create a new dictionary with the keys and values
-            new_dict = data[base_currency.lower()]
-            return new_dict
-        else:
-            # Handle request errors
-            st.error(f"Error fetching data: HTTP Status Code {response.status_code}")
-            return None
-    except Exception as ex:
-        # Handle other errors (e.g., network issues)
-        st.error(f"An error occurred: {ex}")
-        return None
-
-
-def get_currency_historical_data(base_currency, target_currency, days_to_fetch):
-    """
-    Function -- get_currency_historical_data
-        Get the historical currency rate data from the API
-    Parameters:
-        base_currency -- the currency that the user want to convert from
-        target_currency -- the currency that the user want to convert to
-        days_to_fetch -- the number of days to fetch
-    Returns:
-        A list that contains the historical currency rate data
-    """
-    # # Initialize the days_to_fetch to 0
-    # days_to_fetch = 0
-    formatted_date = days_to_fetch.strftime("%Y-%m-%d")
-
-    # API endpoint URL
-    url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/{formatted_date}/currencies/{base_currency.lower()}/{target_currency.lower()}.json"
-
-    try:
-        # Send a request to the API
-        response = requests.get(url)
-        # Check if the request was successful
-        if response.status_code == 200:
-            return response.json().get(target_currency.lower())
-        else:
-            # Handle request errors
-            st.error(f"Error fetching data: HTTP Status Code {response.status_code}")
-            return None
-    except Exception as ex:
-        # Handle other errors (e.g., network issues)
-        st.error(f"An error occurred: {ex}")
-        return None
+        data = self.fetch_data(url)
+        historical_rate = data.get(target_currency.lower())
+        return historical_rate

@@ -8,9 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from models.selected_currency import SelectedCurrency
-from models.fetch_currency_data_copy import CurrencyData
-
-# from models.fetch_currency_data import get_currency_historical_data
+from models.fetch_currency_data import get_currency_historical_data
 
 
 def currency_line_chart():
@@ -22,9 +20,6 @@ def currency_line_chart():
     Returns:
         None
     """
-    # Create an instance of CurrencyData
-    currency_data = CurrencyData()
-
     # Add a title
     st.title("Currency Line Chart")
 
@@ -64,7 +59,7 @@ def currency_line_chart():
         data = []
         for i in range(days_to_fetch):
             date = datetime.now() - timedelta(days=i)
-            historical_rate = currency_data.get_currency_historical_data(
+            historical_rate = get_currency_historical_data(
                 base_currency, target_currency, date
             )
             if historical_rate is not None:
