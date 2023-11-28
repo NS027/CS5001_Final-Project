@@ -22,10 +22,13 @@ def convert_currency():
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
+    # Create an instance of SelectedCurrency
+    selected_currency = SelectedCurrency()
+
     # Get the entered amount from the user
     amount = st.number_input("Enter the amount: ")
     # Set the select box value
-    select_box_value = SelectedCurrency.selected_currencies
+    select_box_value = selected_currency.get_selected_currencies()
 
     # Set the select box
     select_from_currency = st.selectbox("From currency", select_box_value)

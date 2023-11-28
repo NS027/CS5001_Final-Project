@@ -47,11 +47,14 @@ def currency_comprehensive_display():
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
+    # Create an instance of SelectedCurrency
+    selected_currency = SelectedCurrency()
+
     st.title("Currency Comprehensive Display")
     st.write(
         "This page displays the comprehensive currency rate. You can select the currency and the time period."
     )
-    select_box_value = SelectedCurrency.selected_currencies
+    select_box_value = selected_currency.get_selected_currencies()
     from_currency = st.selectbox("Select base currency", select_box_value)
 
     all_data = []

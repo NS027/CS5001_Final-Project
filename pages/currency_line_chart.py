@@ -23,6 +23,9 @@ def currency_line_chart():
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
+    # Create an instance of SelectedCurrency
+    selected_currency = SelectedCurrency()
+
     # Add a title
     st.title("Currency Line Chart")
 
@@ -32,7 +35,7 @@ def currency_line_chart():
     )
 
     # Set the select box value
-    select_box_value = SelectedCurrency.selected_currencies
+    select_box_value = selected_currency.get_selected_currencies()
 
     # Select base currency
     base_currency = st.selectbox("Select base currency", select_box_value)

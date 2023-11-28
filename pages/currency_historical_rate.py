@@ -22,8 +22,11 @@ def display_historical_currency_rate():
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
+    # Create an instance of SelectedCurrency
+    selected_currency = SelectedCurrency()
+
     # Set the select box value
-    select_box_value = SelectedCurrency.selected_currencies
+    select_box_value = selected_currency.get_selected_currencies()
 
     # Set the base currency
     base_currency = st.selectbox("Base currency", select_box_value)
