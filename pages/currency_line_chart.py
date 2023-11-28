@@ -45,17 +45,17 @@ def currency_line_chart():
     # Buttons for selecting the time period
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        if st.button("Three Day"):
+        if st.button("Three Days"):
             days_to_fetch = 3
     with col2:
-        if st.button("One Week"):
-            days_to_fetch = 7
+        if st.button("Five Days"):
+            days_to_fetch = 5
     with col3:
+        if st.button("Seven Days"):
+            days_to_fetch = 7
+    with col4:
         if st.button("Half Month"):
             days_to_fetch = 15
-    with col4:
-        if st.button("One Month"):
-            days_to_fetch = 30
 
     if days_to_fetch > 0:
         # Fetch the historical currency rate data
