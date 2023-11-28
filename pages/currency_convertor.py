@@ -44,7 +44,7 @@ def convert_currency():
             converted_amount = amount * exchange_rate
 
             # Get the currency abbreviation
-            abbreviation = currency_data.get_abbreviaton()
+            abbreviation = currency_data.get_abbreviation()
             from_currency_name = abbreviation.get(from_currency.upper(), "None")
             to_currency_name = abbreviation.get(to_currency.upper(), "None")
             st.success(

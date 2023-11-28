@@ -47,7 +47,7 @@ class CurrencyData:
             st.error(f"An error occurred: {ex}")
             return None
 
-    def get_abbreviaton(self):
+    def get_abbreviation(self):
         """
         Function -- get_abbreviation
             Get the currency abbreviation from the API
@@ -61,13 +61,16 @@ class CurrencyData:
 
         self.abbreviation = self.fetch_data(url)
         data = self.abbreviation
-        # Remove the first data from the json
-        first_key = list(data.keys())[0]
-        del data[first_key]
+        if data is None:
+            return None
+        if data:
+            # Remove the first data from the json
+            first_key = list(data.keys())[0]
+            del data[first_key]
 
-        # Convert the data into a dictionary
-        self.abbreviation = {key.upper(): value for key, value in data.items()}
-        return self.abbreviation
+            # Convert the data into a dictionary
+            self.abbreviation = {key.upper(): value for key, value in data.items()}
+            return self.abbreviation
 
     def get_exchange_rate(self, from_currency, to_currency):
         """
@@ -83,9 +86,12 @@ class CurrencyData:
         url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{from_currency}/{to_currency}.json"
 
         data = self.fetch_data(url)
-        # Get the exchange rate
-        self.exchange_rate = data[to_currency]
-        return self.exchange_rate
+        if data is None:
+            return None
+        if data:
+            # Get the exchange rate
+            self.exchange_rate = data[to_currency]
+            return self.exchange_rate
 
     def get_currency_from_base_currency(self, base_currency):
         """
@@ -100,12 +106,15 @@ class CurrencyData:
         url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/{base_currency.lower()}.json"
 
         data = self.fetch_data(url)
-        # Remove the first data from the json
-        first_key = list(data.keys())[0]
-        del data[first_key]
-        # Create a new dictionary with the keys and values
-        self.base_data = data[base_currency.lower()]
-        return self.base_data
+        if data is None:
+            return None
+        if data:
+            # Remove the first data from the json
+            first_key = list(data.keys())[0]
+            del data[first_key]
+            # Create a new dictionary with the keys and values
+            self.base_data = data[base_currency.lower()]
+            return self.base_data
 
     def get_currency_historical_data(self, base_currency, target_currency, date):
         """
@@ -125,5 +134,8 @@ class CurrencyData:
         url = f"https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/{formatted_date}/currencies/{base_currency.lower()}/{target_currency.lower()}.json"
 
         data = self.fetch_data(url)
-        historical_rate = data.get(target_currency.lower())
-        return historical_rate
+        if data is None:
+            return None
+        if data:
+            historical_rate = data.get(target_currency.lower())
+            return historical_rate
