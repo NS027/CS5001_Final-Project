@@ -4,12 +4,7 @@ Final Project
 This file contains the driver function that runs the program.
 """
 import streamlit as st
-from pages.main_page import main_page
-from pages.currency_convertor import convert_currency
-from pages.currency_rate_display import display_currency_rate
-from pages.currency_historical_rate import display_historical_currency_rate
-from pages.currency_line_chart import currency_line_chart
-from pages.currency_comprehensive_display import currency_comprehensive_display
+from st_pages import Page, show_pages, add_page_title
 
 
 def main():
@@ -21,26 +16,22 @@ def main():
     Returns:
         None
     """
-    st.title("Currency Compass")
-    # Other elements on the Home page
+    # Set the page title
+    add_page_title("Navigation")
 
-    # Add the main page to the PAGES dictionary
-    PAGES = {
-        "Home": main_page,
-        "Currency Converter": convert_currency,
-        "Currency Rate Display": display_currency_rate,
-        "Currency Historical Rate": display_historical_currency_rate,
-        "Currency Line Chart": currency_line_chart,
-        "Currency Comprehensive Display": currency_comprehensive_display,
-    }
+    pages = [
+        Page("pages/main_page.py", "Home", "🏠"),
+        Page("pages/currency_convertor.py", "Currency Converter", "💱"),
+        Page("pages/currency_rate_display.py", "Currency Rate Display", "📊"),
+        Page("pages/currency_historical_rate.py", "Currency Historical Rate", "🕒"),
+        Page("pages/currency_line_chart.py", "Currency Line Chart", "📈"),
+        Page(
+            "pages/currency_comprehensive_display.py",
+            "Currency Comprehensive Display",
+            "🌐"),
+    ]
 
-    # Use a selectbox for navigation
-    st.sidebar.title("Navigation")
-    selection = st.sidebar.radio("Go to", list(PAGES.keys()))
-
-    # Call the app function on the selected page
-    page_func = PAGES[selection]
-    page_func()
+    show_pages(pages)
 
 
 if __name__ == "__main__":
