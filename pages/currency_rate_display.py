@@ -18,6 +18,9 @@ def display_currency_rate():
     Returns:
         None
     """
+    # Set the page title
+    st.title("Currency Rate Display")
+
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 

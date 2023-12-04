@@ -19,6 +19,9 @@ def convert_currency():
     Returns:
         A float that contains the converted amount
     """
+    # Set the page title
+    st.title("Currency Converter")
+
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
@@ -55,6 +58,7 @@ def convert_currency():
             )
         else:
             st.error("Failed to get the exchange rate.")
+
 
 
 if __name__ == "__main__":

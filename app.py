@@ -4,6 +4,7 @@ Final Project
 This file contains the driver function that runs the program.
 """
 import streamlit as st
+from helper import display_link
 from st_pages import Page, show_pages, add_page_title
 
 
@@ -32,6 +33,7 @@ def main():
     ]
 
     show_pages(pages)
+    display_link("/", "Home")
 
 
 if __name__ == "__main__":

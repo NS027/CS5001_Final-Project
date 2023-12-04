@@ -19,6 +19,9 @@ def display_historical_currency_rate():
     Returns:
         None
     """
+    # Set the page title
+    st.title("Currency Historical Rate")
+
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
