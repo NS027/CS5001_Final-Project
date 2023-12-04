@@ -12,7 +12,7 @@ from io import BytesIO
 from models.selected_currency import SelectedCurrency
 from models.fetch_currency_data import CurrencyData
 
-LINE_CHART_DAYS = 10  # The number of days to display in the line chart
+LINE_CHART_DAYS = 5  # The number of days to display in the line chart
 
 
 def mini_chart(df_historical):
