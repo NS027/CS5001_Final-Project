@@ -121,15 +121,22 @@ def currency_comprehensive_display():
                 }
             )
 
-    # Display the DataFrame without the index
+    # Create the DataFrame
     df = pd.DataFrame(all_data)
 
-    df_html = df.to_html(escape=False, index=False)  # Convert DataFrame to HTML
-    # Create two columns for the features
-    col1, col2, col3 = st.columns([2, 10, 2])
+    # Define the styles for table headers and data cells
+    s1 = dict(selector="th", props=[("text-align", "center")])
+    s2 = dict(selector="td", props=[("text-align", "center")])
 
+    # Create the Styler object and apply the formatting
+    styler = df.style.set_table_styles([s1, s2]).hide(axis=0)
+    styler = styler.format({"Rate": "{:.2f}", "Buy Rate": "{:.2f}"})
+    df_html = styler.to_html(escape=False)  # Convert DataFrame to HTML with styles
+
+    # Use columns to control the layout
+    col1, col2, col3 = st.columns([2, 10, 2])
     with col2:
-        st.markdown(df_html, unsafe_allow_html=True)
+        st.write(df_html, unsafe_allow_html=True)  # Display the styled table
 
 
 if __name__ == "__main__":
