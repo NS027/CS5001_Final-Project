@@ -13,7 +13,7 @@ def main_page():
     """
     # Set the page title
     st.markdown(
-        '<p style="font-family: Georgia; color:#025167; font-size: 30px; font-weight: bold;">Currency Compass</p>',
+        '<p style="font-family: Georgia; color:#025167; font-size: 36px; font-weight: bold;">Currency Compass</p>',
         unsafe_allow_html=True,
     )
     st.markdown(

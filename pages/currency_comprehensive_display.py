@@ -50,12 +50,25 @@ def currency_comprehensive_display():
     # Create an instance of SelectedCurrency
     selected_currency = SelectedCurrency()
 
-    st.title("Currency Comprehensive Display")
-    st.write(
-        "This page displays the comprehensive currency rate. You can select the currency and the time period."
+    # Set the page title
+    st.markdown(
+        '<p style="font-family: Georgia; color:#025167; font-size: 36px; font-weight: bold;">Currency Comprehensive Display</p>',
+        unsafe_allow_html=True,
     )
+    # Add a divider
+    st.markdown(
+        """
+    <div style='height: 2px; background-color: #FFA040; margin-top: 0px; margin-bottom: 5px;'></div>
+    """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p style="font-family:Georgia; text-align: justify; color:#ARRGGBB; font-size: 15px; font-weight: normal;">This page displays the comprehensive currency rate. You can select the currency and the time period.</p>',
+        unsafe_allow_html=True,
+    )
+
     select_box_value = selected_currency.get_selected_currencies()
-    from_currency = st.selectbox("Select base currency", select_box_value)
+    from_currency = st.selectbox("**Select base currency**", select_box_value)
 
     all_data = []
     for to_currency in select_box_value:
@@ -110,8 +123,13 @@ def currency_comprehensive_display():
 
     # Display the DataFrame without the index
     df = pd.DataFrame(all_data)
-    html = df.to_html(escape=False, index=False)  # Convert DataFrame to HTML
-    st.markdown(html, unsafe_allow_html=True)
+
+    df_html = df.to_html(escape=False, index=False)  # Convert DataFrame to HTML
+    # Create two columns for the features
+    col1, col2, col3 = st.columns([2, 10, 2])
+
+    with col2:
+        st.markdown(df_html, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
