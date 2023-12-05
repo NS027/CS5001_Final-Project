@@ -129,7 +129,6 @@ def main_page():
     """,
         unsafe_allow_html=True,
     )
-    st.write("Please choose one of the following options to start:")
 
 
 def main():
@@ -152,12 +151,11 @@ def main():
         Page("pages/currency_line_chart.py", "Currency Line Chart", "📈"),
         Page(
             "pages/currency_comprehensive_display.py",
-            "Currency Comprehensive Display",
-            "🌐"),
+            "Currency Comprehensive Display", "🌐"),
     ]
 
     show_pages(pages)
-    display_link("/", "Home")
+    # display_link("/", "Home")
 
 
 if __name__ == "__main__":

@@ -116,18 +116,25 @@ def set_the_pilot(df, base_currency, target_currency):
     plt.plot(
         df["Date"],  # X values
         df["Rate"],  # Y values
-        color="black",
+        color="#0078D7",
         marker="",
         linestyle="solid",
         linewidth=2,
         markersize=6,
     )
+    # Remove the axes frame
+    plt.gca().spines['top'].set_visible(False)
+    plt.gca().spines['right'].set_visible(False)
+    plt.gca().spines['left'].set_visible(False)
+    plt.gca().spines['bottom'].set_visible(False)
+
     plt.ylim(y_min, y_max)
     plt.title(f"Exchange rate trend from {base_currency} to {target_currency}")
     plt.xlabel("Date")
     plt.ylabel("Exchange rate")
     plt.xticks(rotation=45)
-    plt.grid(False)  # Do not display the grid
+    # Enable horizontal grid
+    plt.grid(axis='y', color='gray', linestyle='-', linewidth=0.5)
     plt.tight_layout()
     st.pyplot(plt)
 

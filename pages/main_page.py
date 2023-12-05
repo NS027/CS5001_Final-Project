@@ -123,7 +123,6 @@ def main_page():
     """,
         unsafe_allow_html=True,
     )
-    st.write("Please choose one of the following options to start:")
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ from io import BytesIO
 from models.selected_currency import SelectedCurrency
 from models.fetch_currency_data import CurrencyData
 
-LINE_CHART_DAYS = 5  # The number of days to display in the line chart
+LINE_CHART_DAYS = 7  # The number of days to display in the line chart
 
 
 def mini_chart(df_historical):
@@ -25,10 +25,19 @@ def mini_chart(df_historical):
         A base64 encoded string that contains the mini chart
     """
     plt.figure(figsize=(2, 1))
-    plt.plot(df_historical["date"], df_historical["rate"])
+    plt.plot(df_historical["date"], df_historical["rate"], color="#B22222")
     plt.xticks([])
     plt.yticks([])
+    # Enable horizontal grid
+    plt.grid(axis='y', color='gray', linestyle='-', linewidth=0.5)
     plt.tight_layout()
+
+     # Change the spines to light grey
+    spines = plt.gca().spines
+    for spine in spines.values():
+        spine.set_visible(True)
+        spine.set_color('lightgrey')
+
     buf = BytesIO()
     plt.savefig(buf, format="png")
     plt.close()
