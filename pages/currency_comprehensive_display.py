@@ -12,7 +12,7 @@ from io import BytesIO
 from models.selected_currency import SelectedCurrency
 from models.fetch_currency_data import CurrencyData
 
-LINE_CHART_DAYS = 7  # The number of days to display in the line chart
+# LINE_CHART_DAYS = 7  # The number of days to display in the line chart
 
 
 def mini_chart(df_historical):
@@ -28,11 +28,9 @@ def mini_chart(df_historical):
     plt.plot(df_historical["date"], df_historical["rate"], color="#B22222")
     plt.xticks([])
     plt.yticks([])
-    # Enable horizontal grid
-    plt.grid(axis='y', color='gray', linestyle='-', linewidth=0.5)
     plt.tight_layout()
 
-     # Change the spines to light grey
+    # Change the spines to light grey
     spines = plt.gca().spines
     for spine in spines.values():
         spine.set_visible(True)
@@ -78,8 +76,10 @@ def currency_comprehensive_display():
     )
 
     select_box_value = selected_currency.get_selected_currencies()
-    from_currency = st.selectbox(":orange[**Select base currency**]", select_box_value)
-
+    from_currency = st.selectbox("**Select base currency**", select_box_value)
+    # Enter the number of days to display in the line chart, default to 7
+    LINE_CHART_DAYS = st.number_input("**Enter the number of days to display in the line chart:**", min_value=1, max_value=30, value=7, step=1)
+    
     all_data = []
     for to_currency in select_box_value:
         if to_currency != from_currency:

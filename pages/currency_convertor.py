@@ -44,7 +44,7 @@ def convert_currency():
     selected_currency = SelectedCurrency()
 
     # Get the entered amount from the user
-    amount = st.number_input("Enter the amount: ")
+    amount = st.number_input("**Enter the amount: **")
     # Set the select box value
     select_box_value = selected_currency.get_selected_currencies()
 
