@@ -19,8 +19,24 @@ def display_historical_currency_rate():
     Returns:
         None
     """
+
     # Set the page title
-    st.title("Currency Historical Rate")
+    st.markdown(
+        '<p style="font-family: Georgia; color:#025167; font-size: 36px; font-weight: bold;">Currency Historical Rate</p>',
+        unsafe_allow_html=True,
+    )
+    # Add a divider
+    st.markdown(
+        """
+    <div style='height: 3px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 3px;'></div>
+    <div style='height: 2px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 5px;'></div>
+    """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p style="font-family:Georgia; text-align: justify; color:#ARRGGBB; font-size: 15px; font-weight: normal;">Explore the Currency Historical Rate feature to trace and analyze past exchange rate trends, providing valuable insights for strategic financial planning and market analysis.</p>',
+        unsafe_allow_html=True,
+    )
 
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
@@ -69,11 +85,22 @@ def display_historical_currency_rate():
 
         # Check if data is not empty before creating the DataFrame
         if data:
+            # Create the DataFrame
             df = pd.DataFrame(data)
-            # Sort the dataframe by the "Date" column in descending order
-            df = df.sort_values(by="Date", ascending=False)
-            # Display the dataframe without the index column
-            st.dataframe(df.set_index("Date"))
+
+            # Define the styles for table headers and data cells
+            s1 = dict(selector="th", props=[("text-align", "center")])
+            s2 = dict(selector="td", props=[("text-align", "center")])
+
+            # Create the Styler object and apply the formatting
+            styler = df.style.set_table_styles([s1, s2]).hide(axis=0)
+            styler = styler.format({"Rate": "{:.2f}", "Buy Rate": "{:.2f}"})
+            df_html = styler.to_html(escape=False)
+
+            # Use columns to control the layout
+            col1, col2, col3 = st.columns([2, 3, 1])
+            with col2:
+                st.write(df_html, unsafe_allow_html=True)
         else:
             st.error("No historical data available for the selected period.")
     else:

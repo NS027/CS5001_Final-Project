@@ -38,7 +38,8 @@ def main_page():
     # Add a divider
     st.markdown(
         """
-    <div style='height: 2px; background-color: #FFA040; margin-top: 3px; margin-bottom: 5px;'></div>
+    <div style='height: 3px; background-color: #3A3B3C; margin-top: 5px; margin-bottom: 3px;'></div>
+    <div style='height: 2px; background-color: #3A3B3C; margin-top: 3px; margin-bottom: 5px;'></div>
     """,
         unsafe_allow_html=True,
     )
@@ -53,7 +54,7 @@ def main_page():
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 12px; font-weight: normal;">Experience instant currency conversion with real-time accuracy, ensuring you get the most up-to-date exchange rates at the click of a button.</p>',
+            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 14px; font-weight: normal;">Experience instant currency conversion with real-time accuracy, ensuring you get the most up-to-date exchange rates at the click of a button.</p>',
             unsafe_allow_html=True,
         )
 
@@ -66,7 +67,7 @@ def main_page():
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 12px; font-weight: normal;">Stay informed with the latest exchange rates, providing you with the pulse of the currency markets for informed financial decisions.</p>',
+            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 14px; font-weight: normal;">Stay informed with the latest exchange rates, providing you with the pulse of the currency markets for informed financial decisions.</p>',
             unsafe_allow_html=True,
         )
 
@@ -82,7 +83,7 @@ def main_page():
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 12px; font-weight: normal;">Analyze historical data to gain insights into the currency markets, and track trends to make informed decisions.</p>',
+            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 14px; font-weight: normal;">Analyze historical data to gain insights into the currency markets, and track trends to make informed decisions.</p>',
             unsafe_allow_html=True,
         )
 
@@ -95,7 +96,7 @@ def main_page():
             unsafe_allow_html=True,
         )
         st.markdown(
-            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 12px; font-weight: normal;">Track trends with our line charts, providing you with a visual representation of the currency markets.</p>',
+            '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 14px; font-weight: normal;">Track trends with our line charts, providing you with a visual representation of the currency markets.</p>',
             unsafe_allow_html=True,
         )
 
@@ -108,7 +109,7 @@ def main_page():
         unsafe_allow_html=True,
     )
     st.markdown(
-        '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 12px; font-weight: normal;">Explore market dynamics with our Comprehensive Rate Display, which encapsulates rate trends and current exchange rates at a glance. Secure the best deals with up-to-date buy rates, ensuring you are well-informed for your currency transactions.</p>',
+        '<p style="font-family:Helvetica; text-align: justify; color:#ARRGGBB; font-size: 14px; font-weight: normal;">Explore market dynamics with our Comprehensive Rate Display, which encapsulates rate trends and current exchange rates at a glance. Secure the best deals with up-to-date buy rates, ensuring you are well-informed for your currency transactions.</p>',
         unsafe_allow_html=True,
     )
     # Create a hyperlink for the Currency Converter
@@ -117,7 +118,8 @@ def main_page():
     # Add a divider
     st.markdown(
         """
-    <div style='height: 2px; background-color: #FFA040; margin-top: 5px; margin-bottom: 5px;'></div>
+    <div style='height: 2px; background-color: #3A3B3C; margin-top: 5px; margin-bottom: 5px;'></div>
+    <div style='height: 3px; background-color: #3A3B3C; margin-top: 3px; margin-bottom: 5px;'></div>
     """,
         unsafe_allow_html=True,
     )

@@ -20,7 +20,22 @@ def convert_currency():
         A float that contains the converted amount
     """
     # Set the page title
-    st.title("Currency Converter")
+    st.markdown(
+        '<p style="font-family: Georgia; color:#025167; font-size: 36px; font-weight: bold;">Currency Convertor</p>',
+        unsafe_allow_html=True,
+    )
+    # Add a divider
+    st.markdown(
+        """
+    <div style='height: 3px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 3px;'></div>
+    <div style='height: 2px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 5px;'></div>
+    """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p style="font-family:Georgia; text-align: justify; color:#ARRGGBB; font-size: 15px; font-weight: normal;">The Currency Converter delivers instantaneous and precise currency conversions, utilizing up-to-the-minute exchange rates for dependable financial transactions.</p>',
+        unsafe_allow_html=True,
+    )
 
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
@@ -58,7 +73,6 @@ def convert_currency():
             )
         else:
             st.error("Failed to get the exchange rate.")
-
 
 
 if __name__ == "__main__":

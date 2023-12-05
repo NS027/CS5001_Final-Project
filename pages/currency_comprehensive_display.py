@@ -58,7 +58,8 @@ def currency_comprehensive_display():
     # Add a divider
     st.markdown(
         """
-    <div style='height: 2px; background-color: #FFA040; margin-top: 0px; margin-bottom: 5px;'></div>
+    <div style='height: 3px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 3px;'></div>
+    <div style='height: 2px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 5px;'></div>
     """,
         unsafe_allow_html=True,
     )
@@ -68,7 +69,7 @@ def currency_comprehensive_display():
     )
 
     select_box_value = selected_currency.get_selected_currencies()
-    from_currency = st.selectbox("**Select base currency**", select_box_value)
+    from_currency = st.selectbox(":orange[**Select base currency**]", select_box_value)
 
     all_data = []
     for to_currency in select_box_value:

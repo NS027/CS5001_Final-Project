@@ -20,19 +20,28 @@ def currency_line_chart():
     Returns:
         None
     """
+    # Set the page title
+    st.markdown(
+        '<p style="font-family: Georgia; color:#025167; font-size: 36px; font-weight: bold;">Currency Line Chart</p>',
+        unsafe_allow_html=True,
+    )
+    # Add a divider
+    st.markdown(
+        """
+    <div style='height: 3px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 3px;'></div>
+    <div style='height: 2px; background-color: #3A3B3C; margin-top: 0px; margin-bottom: 5px;'></div>
+    """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p style="font-family:Georgia; text-align: justify; color:#ARRGGBB; font-size: 15px; font-weight: normal;">Dive into market dynamics with our Currency Line Chart, a visual tool that elegantly plots currency fluctuations over time, enabling you to grasp trends at a glance.</p>',
+        unsafe_allow_html=True,
+    )
     # Create an instance of CurrencyData
     currency_data = CurrencyData()
 
     # Create an instance of SelectedCurrency
     selected_currency = SelectedCurrency()
-
-    # Add a title
-    st.title("Currency Line Chart")
-
-    # Add a description
-    st.write(
-        "This page displays the line chart of currency rate. You can select the currency and the time period."
-    )
 
     # Set the select box value
     select_box_value = selected_currency.get_selected_currencies()
